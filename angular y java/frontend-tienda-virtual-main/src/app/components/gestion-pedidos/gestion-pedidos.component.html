@@ -1,0 +1,65 @@
+<div class="container mt-4">
+  <h2 class="text-center text-dark">Gestión de Pedidos</h2>
+
+  <!-- Mostrar pedidos si existen -->
+  <div *ngIf="pedidos.length > 0; else sinPedidos">
+    <div *ngFor="let pedido of pedidos" class="pedido mb-4 p-3 border rounded bg-dark">
+      <p><strong>ID del Pedido:</strong> {{ pedido.id }}</p>
+      <p><strong>Usuario:</strong> {{ pedido.usuario_nombre }}</p>
+      <p><strong>Total:</strong> {{ pedido.total | currency }}</p>
+      <p><strong>Estado:</strong> {{ pedido.estado }}</p>
+      <p><strong>Fecha de Creación:</strong> {{ pedido.creado_en | date:'medium' }}</p>
+      <p *ngIf="pedido.transportista"><strong>Transportista:</strong> {{ pedido.transportista }}</p>
+      <p *ngIf="pedido.numero_seguimiento"><strong>Número de Seguimiento:</strong> {{ pedido.numero_seguimiento }}</p>
+
+      <div>
+        <h4>Detalles:</h4>
+        <ul class="list-group">
+          <li *ngFor="let detalle of pedido.detalles" class="list-group-item bg-dark text-light">
+            {{ detalle.nombre }} - Cantidad: {{ detalle.cantidad }} - Precio Unitario: {{ detalle.precio_unitario | currency }}
+          </li>
+        </ul>
+      </div>
+
+      <button (click)="editarPedido(pedido)" class="btn btn-warning btn-sm mt-2">
+        <i class="bi bi-pencil"></i> Editar Estado
+      </button>
+    </div>
+
+    <!-- Formulario de edición -->
+    <div *ngIf="pedidoEditado" class="edit-form mt-4 p-3 border rounded bg-dark">
+      <h3>Editar Pedido #{{ pedidoEditado.id }}</h3>
+      <div class="mb-3">
+        <label for="estado" class="form-label text-light">Estado:</label>
+        <select [(ngModel)]="pedidoEditado.estado" id="estado" class="form-select">
+          <option value="Pendiente">Pendiente</option>
+          <option value="Enviado">Enviado</option>
+          <option value="Entregado">Entregado</option>
+          <option value="Cancelado">Cancelado</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="transportista" class="form-label text-light">Transportista:</label>
+        <input [(ngModel)]="pedidoEditado.transportista" id="transportista" class="form-control" placeholder="Transportista" />
+      </div>
+
+      <div class="mb-3">
+        <label for="numero_seguimiento" class="form-label text-light">Número de Seguimiento:</label>
+        <input [(ngModel)]="pedidoEditado.numero_seguimiento" id="numero_seguimiento" class="form-control" placeholder="Número de Seguimiento" />
+      </div>
+
+      <button (click)="guardarCambios()" class="btn btn-success">
+        <i class="bi bi-save"></i> Guardar Cambios
+      </button>
+      <button (click)="cancelarEdicion()" class="btn btn-secondary ms-2">
+        <i class="bi bi-x-circle"></i> Cancelar
+      </button>
+    </div>
+  </div>
+
+  <!-- Mensaje si no hay pedidos -->
+  <ng-template #sinPedidos>
+    <p class="alert alert-warning mt-4">No hay pedidos para mostrar.</p>
+  </ng-template>
+</div>

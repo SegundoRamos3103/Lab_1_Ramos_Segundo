@@ -1,0 +1,86 @@
+<div class="container mt-4">
+  <h2 class="text-center text-dark">Gestión de Categorías</h2>
+
+  <!-- Formulario para crear nueva categoría -->
+  <div class="mt-4">
+    <h3>Crear Nueva Categoría</h3>
+    <form (ngSubmit)="crearCategoria()">
+      <div class="mb-3">
+        <input
+          [(ngModel)]="nuevaCategoria.nombre"
+          name="nombre"
+          placeholder="Nombre"
+          required
+          class="form-control"
+        />
+      </div>
+      <div class="mb-3">
+        <textarea
+          [(ngModel)]="nuevaCategoria.descripcion"
+          name="descripcion"
+          placeholder="Descripción"
+          class="form-control"
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Crear Categoría</button>
+    </form>
+  </div>
+
+  <!-- Mostrar categorías si existen -->
+  <div *ngIf="categorias.length > 0; else sinCategorias" class="mt-4">
+    <h3>Lista de Categorías</h3>
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let categoria of categorias">
+          <td>{{ categoria.id }}</td>
+          <td>{{ categoria.nombre }}</td>
+          <td>{{ categoria.descripcion }}</td>
+          <td>
+            <button (click)="editarCategoria(categoria)" class="btn btn-warning btn-sm">
+              <i class="bi bi-pencil"></i> Editar
+            </button>
+            <button (click)="eliminarCategoria(categoria.id)" class="btn btn-danger btn-sm">
+              <i class="bi bi-trash"></i> Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Formulario para editar categoría -->
+  <div *ngIf="categoriaEditada" class="edit-form mt-4">
+    <h3>Editar Categoría #{{ categoriaEditada.id }}</h3>
+    <div class="mb-3">
+      <input
+        [(ngModel)]="categoriaEditada.nombre"
+        placeholder="Nombre"
+        required
+        class="form-control"
+      />
+    </div>
+    <div class="mb-3">
+      <textarea
+        [(ngModel)]="categoriaEditada.descripcion"
+        placeholder="Descripción"
+        class="form-control"
+      ></textarea>
+    </div>
+    <button (click)="actualizarCategoria()" class="btn btn-success">Guardar</button>
+    <button (click)="categoriaEditada = null" class="btn btn-secondary">Cancelar</button>
+  </div>
+
+  <!-- Mensaje si no hay categorías -->
+  <ng-template #sinCategorias>
+    <p class="alert alert-warning mt-4">No hay categorías registradas.</p>
+  </ng-template>
+</div>
+

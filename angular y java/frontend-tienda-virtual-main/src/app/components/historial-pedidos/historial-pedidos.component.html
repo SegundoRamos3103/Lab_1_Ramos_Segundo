@@ -1,0 +1,42 @@
+<h2 class="text-center text-dark">Historial de Pedidos</h2>
+
+<div *ngIf="pedidos.length > 0; else sinPedidos">
+  <div *ngFor="let pedido of pedidos" class="pedido mb-3 p-3 bg-dark text-light rounded">
+    <p><strong>ID del Pedido:</strong> {{ pedido.id }}</p>
+    <p><strong>Total:</strong> {{ pedido.total | currency }}</p>
+    <p><strong>Estado:</strong> {{ pedido.estado }}</p>
+    <p><strong>Fecha de Creación:</strong> {{ pedido.creado_en | date:'medium' }}</p>
+    <p *ngIf="pedido.transportista"><strong>Transportista:</strong> {{ pedido.transportista }}</p>
+    <p *ngIf="pedido.numero_seguimiento"><strong>Número de Seguimiento:</strong> {{ pedido.numero_seguimiento }}</p>
+    
+    <div>
+      <h4>Detalles:</h4>
+      <ul>
+        <li *ngFor="let detalle of pedido.detalles">
+          <div>
+            <!-- Muestra el nombre del producto y cantidad -->
+            {{ detalle.nombre }} - Cantidad: {{ detalle.cantidad }} - Precio Unitario: {{ detalle.precio_unitario | currency }}
+          </div>
+          
+          <!-- Carrusel de imágenes de productos -->
+          <!-- Carrusel de imágenes de productos -->
+          <div *ngIf="detalle.imagen" class="text-center"> <!-- Asegura que el contenido del carrusel esté centrado -->
+            <carousel>
+              <ng-container *ngFor="let imagen of detalle.imagen.split(',')">
+                <slide>
+                  <img [src]="imagen" style="height: 400px; width: auto; object-fit: contain;" class="d-block w-50 mx-auto " alt="Imagen del producto">
+                </slide>
+              </ng-container>
+            </carousel>
+          </div>
+        </li>
+      </ul>
+    </div>
+    
+    <button *ngIf="pedido.estado === 'Pendiente'" class="btn btn-danger" (click)="cancelarPedido(pedido.id)">Cancelar Pedido</button>
+  </div>
+</div>
+
+<ng-template #sinPedidos>
+  <p class="text-light">No hay pedidos en tu historial.</p>
+</ng-template>

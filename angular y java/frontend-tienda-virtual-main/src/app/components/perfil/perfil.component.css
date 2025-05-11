@@ -1,0 +1,31 @@
+.perfil-container {
+  background-color: #343a40; /* Fondo oscuro */
+  color: #fff; /* Texto blanco */
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #000000;
+}
+
+.perfil-info p {
+  margin: 10px 0;
+}
+
+.perfil-actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.perfil-actions a {
+  color: #007bff;
+}
+
+.perfil-actions a:hover {
+  text-decoration: underline;
+}

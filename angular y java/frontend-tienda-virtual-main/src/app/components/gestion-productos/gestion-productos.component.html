@@ -1,0 +1,102 @@
+<div class="container mt-4">
+  <h2 class="text-center text-dark">Gestión de Productos</h2>
+
+  <!-- Formulario para crear producto -->
+  <div *ngIf="!editando">
+    <h3 class="text-dark">Crear Nuevo Producto</h3>
+    <form (ngSubmit)="crearProducto()">
+      <div class="mb-3">
+        <label for="nombre" class="form-label text-dark">Nombre:</label>
+        <input [(ngModel)]="nuevoProducto.nombre" name="nombre" id="nombre" class="form-control" placeholder="Nombre del producto" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="descripcion" class="form-label text-dark">Descripción:</label>
+        <textarea [(ngModel)]="nuevoProducto.descripcion" name="descripcion" id="descripcion" class="form-control" placeholder="Descripción del producto"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="precio" class="form-label text-dark">Precio:</label>
+        <input [(ngModel)]="nuevoProducto.precio" name="precio" id="precio" type="number" class="form-control" placeholder="Precio" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="imagenes" class="form-label text-dark">URLs de Imágenes:</label>
+        <input [(ngModel)]="nuevoProducto.imagenes" name="imagenes" id="imagenes" class="form-control" placeholder="URLs de imágenes (separadas por comas)" />
+      </div>
+
+      <div class="mb-3">
+        <label for="stock" class="form-label text-dark">Stock:</label>
+        <input [(ngModel)]="nuevoProducto.stock" name="stock" id="stock" type="number" class="form-control" placeholder="Cantidad de stock" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="categoria_id" class="form-label text-dark">Categoría:</label>
+        <select [(ngModel)]="nuevoProducto.categoria_id" name="categoria_id" id="categoria_id" class="form-select" required>
+          <option value="" disabled selected>Selecciona una categoría</option>
+          <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Crear Producto</button>
+    </form>
+  </div>
+
+  <!-- Formulario para editar producto -->
+  <div *ngIf="editando">
+    <h3 class="text-dark">Editar Producto</h3>
+    <form (ngSubmit)="actualizarProducto()">
+      <div class="mb-3">
+        <label for="nombreEdit" class="form-label text-dark">Nombre:</label>
+        <input [(ngModel)]="productoEditado.nombre" name="nombre" id="nombreEdit" class="form-control" placeholder="Nombre del producto" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="descripcionEdit" class="form-label text-dark">Descripción:</label>
+        <textarea [(ngModel)]="productoEditado.descripcion" name="descripcion" id="descripcionEdit" class="form-control" placeholder="Descripción del producto"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="precioEdit" class="form-label text-dark">Precio:</label>
+        <input [(ngModel)]="productoEditado.precio" name="precio" id="precioEdit" type="number" class="form-control" placeholder="Precio" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="imagenesEdit" class="form-label text-dark">URLs de Imágenes:</label>
+        <input [(ngModel)]="productoEditado.imagenes" name="imagenes" id="imagenesEdit" class="form-control" placeholder="URLs de imágenes (separadas por comas)" />
+      </div>
+
+      <div class="mb-3">
+        <label for="stockEdit" class="form-label text-dark">Stock:</label>
+        <input [(ngModel)]="productoEditado.stock" name="stock" id="stockEdit" type="number" class="form-control" placeholder="Cantidad de stock" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="categoria_idEdit" class="form-label text-dark">Categoría:</label>
+        <select [(ngModel)]="productoEditado.categoria_id" name="categoria_id" id="categoria_idEdit" class="form-select" required>
+          <option value="" disabled>Selecciona una categoría</option>
+          <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-success">Actualizar Producto</button>
+      <button type="button" (click)="editando = false" class="btn btn-secondary ms-2">Cancelar</button>
+    </form>
+  </div>
+
+  <!-- Lista de productos -->
+  <h3 class="text-dark">Lista de Productos</h3>
+  <ul class="list-group">
+    <li *ngFor="let producto of productos" class="list-group-item d-flex justify-content-between align-items-center bg-light text-dark mb-2">
+      <span>{{ producto.nombre }} - {{ producto.precio | currency }} - {{ producto.stock }} unidades - Categoría: {{ producto.categoria || 'Sin categoría' }}</span>
+      <div>
+        <button (click)="editarProducto(producto)" class="btn btn-warning btn-sm">
+          <i class="bi bi-pencil"></i> Editar
+        </button>
+        <button (click)="eliminarProducto(producto.id)" class="btn btn-danger btn-sm ms-2">
+          <i class="bi bi-trash"></i> Eliminar
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>

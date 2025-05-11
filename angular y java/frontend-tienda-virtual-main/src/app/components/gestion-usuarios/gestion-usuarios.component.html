@@ -1,0 +1,35 @@
+<h2 class="text-center text-dark">Gestión de Usuarios</h2>
+
+<div *ngIf="usuarios.length > 0; else sinUsuarios">
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Rol</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.id }}</td>
+        <td>{{ usuario.nombre }}</td>
+        <td>{{ usuario.correo }}</td>
+        <td>{{ usuario.rol }}</td>
+        <td>{{ usuario.bloqueado ? 'Bloqueado' : 'Activo' }}</td>
+        <td>
+          <button class="btn btn-warning" (click)="bloquearUsuario(usuario.id, !usuario.bloqueado)">
+            {{ usuario.bloqueado ? 'Desbloquear' : 'Bloquear' }}
+          </button>
+          <button class="btn btn-danger" (click)="eliminarUsuario(usuario.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #sinUsuarios>
+  <p class="text-light">No hay usuarios registrados.</p>
+</ng-template>

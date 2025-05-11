@@ -1,0 +1,89 @@
+<h2 class="text-center text-dark">Lista de Productos</h2>
+
+<form (ngSubmit)="buscarProductos()" class="mb-4">
+  <div class="form-row align-items-center">
+    <!-- Nombre del producto -->
+    <div class="col-md-2 mb-3">
+      <label for="nombre" class="text-dark">Nombre del producto</label>
+      <input id="nombre" [(ngModel)]="filtros.nombre" name="nombre" class="form-control" placeholder="Nombre del producto" />
+    </div>
+    
+    <!-- Categoría -->
+    <div class="col-md-2 mb-3">
+      <label for="categoria_id" class="text-dark">Categoría</label>
+      <select id="categoria_id" [(ngModel)]="filtros.categoria_id" name="categoria_id" class="form-control">
+        <option value="">Todas las categorías</option>
+        <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre }}</option>
+      </select>
+    </div>
+    
+    <!-- Precio mínimo -->
+    <div class="col-md-2 mb-3">
+      <label for="precioMin" class="text-dark">Precio mínimo</label>
+      <input id="precioMin" [(ngModel)]="filtros.precioMin" name="precioMin" type="number" class="form-control" placeholder="Precio mínimo" />
+    </div>
+    
+    <!-- Precio máximo -->
+    <div class="col-md-2 mb-3">
+      <label for="precioMax" class="text-dark">Precio máximo</label>
+      <input id="precioMax" [(ngModel)]="filtros.precioMax" name="precioMax" type="number" class="form-control" placeholder="Precio máximo" />
+    </div>
+    
+    <!-- Ordenar por -->
+    <div class="col-md-2 mb-3">
+      <label for="ordenarPor" class="text-dark">Ordenar por</label>
+      <select id="ordenarPor" [(ngModel)]="filtros.ordenarPor" name="ordenarPor" class="form-control">
+        <option value="precio">Precio</option>
+        <option value="nombre">Nombre</option>
+        <option value="creado_en">Fecha de Creación</option>
+      </select>
+    </div>
+    
+    <!-- Orden -->
+    <div class="col-md-2 mb-3">
+      <label for="orden" class="text-dark">Orden</label>
+      <select id="orden" [(ngModel)]="filtros.orden" name="orden" class="form-control">
+        <option value="ASC">Ascendente</option>
+        <option value="DESC">Descendente</option>
+      </select>
+    </div>
+    
+    <!-- Botón de búsqueda -->
+    <div class="col-md-2 mb-3">
+      <button type="submit" class="btn btn-success w-100">Buscar</button>
+    </div>
+  </div>
+</form>
+
+
+
+
+<ul class="list-group">
+  <li *ngFor="let producto of productos" class="list-group-item d-flex justify-content-between align-items-center bg-dark text-light mb-2 rounded">
+    <div class="d-flex align-items-center flex-grow-1" style="height: 300px">
+      <!-- Información del producto -->
+      <div class="mr-3">
+        <strong>{{ producto.nombre }}</strong><br />
+        Precio: {{ producto.precio | currency }}<br />
+        Stock: {{ producto.stock }} unidades<br />
+        Categoría: {{ producto.categoria || 'Sin categoría' }}
+      </div>
+    
+      <!-- Carrusel de imágenes -->
+      <div *ngIf="producto.imagenes" class="d-flex align-items-center">
+        <div class="carousel-container">
+          <carousel>
+            <slide *ngFor="let imagen of producto.imagenes.split(',')">
+              <img [src]="imagen" class="d-block w-100" alt="Imagen de producto" />
+            </slide>
+          </carousel>
+        </div>
+      </div>
+    </div>
+    
+    
+
+    <!-- Botón de agregar al carrito -->
+    <button class="btn btn-success" (click)="agregarAlCarrito(producto.id)">Agregar al Carrito</button>
+  </li>
+</ul>

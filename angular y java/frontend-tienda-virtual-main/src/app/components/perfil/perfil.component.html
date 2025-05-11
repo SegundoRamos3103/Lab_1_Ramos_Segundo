@@ -1,0 +1,18 @@
+<h2>Perfil del Usuario</h2>
+
+<div *ngIf="usuario; else cargando" class="perfil-container">
+  <div class="perfil-info">
+    <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
+    <p><strong>Correo:</strong> {{ usuario.correo }}</p>
+    <p><strong>Dirección:</strong> {{ usuario.direccion }}</p>
+    <p><strong>Rol:</strong> {{ usuario.rol }}</p>
+  </div>
+  
+  <div class="perfil-actions">
+    <a routerLink="/actualizar-contrasena" class="btn btn-link">Cambiar Contraseña</a>
+  </div>
+</div>
+
+<ng-template #cargando>
+  <p>Cargando información del usuario...</p>
+</ng-template>

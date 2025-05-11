@@ -1,0 +1,6 @@
+projectKey=ProyectoAngular_SW_R
+serverUrl=http://localhost:9000
+serverVersion=25.5.0.107428
+dashboardUrl=http://localhost:9000/dashboard?id=ProyectoAngular_SW_R
+ceTaskId=b039325c-9bfe-4ba2-83a5-2eb9dc6e85da
+ceTaskUrl=http://localhost:9000/api/ce/task?id=b039325c-9bfe-4ba2-83a5-2eb9dc6e85da

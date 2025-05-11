@@ -1,0 +1,37 @@
+<h2>Registro de Usuario</h2>
+
+<form (ngSubmit)="registrar()" class="registro-form">
+  <div class="form-row">
+    <div class="col-md-6">
+      <input [(ngModel)]="usuario.nombre" name="nombre" placeholder="Nombre" 
+             required class="form-control" />
+      <small class="text-danger" *ngIf="errores.nombre">{{errores.nombre}}</small>
+    </div>
+    
+    <div class="col-md-6">
+      <input [(ngModel)]="usuario.correo" type="email" name="correo" 
+             placeholder="Correo" required class="form-control" />
+      <small class="text-danger" *ngIf="errores.correo">{{errores.correo}}</small>
+    </div>
+    
+    <div class="col-md-6">
+      <input [(ngModel)]="usuario.contrasena" name="contrasena" type="password" 
+             placeholder="Contraseña" required class="form-control" />
+      <small class="text-danger" *ngIf="errores.contrasena">{{errores.contrasena}}</small>
+    </div>
+    
+    <div class="col-md-6">
+      <input [(ngModel)]="usuario.direccion" name="direccion" 
+             placeholder="Dirección" required class="form-control" />
+      <small class="text-danger" *ngIf="errores.direccion">{{errores.direccion}}</small>
+    </div>
+    
+    <div class="col-md-12">
+      <button type="submit" class="btn btn-primary w-100">Registrar</button>
+    </div>
+  </div>
+</form>
+
+<div class="form-link">
+  <a routerLink="/login">¿Ya tienes una cuenta? Inicia sesión</a>
+</div>

@@ -1,0 +1,18 @@
+<h2>Iniciar Sesión</h2>
+
+<form (ngSubmit)="iniciarSesion()" class="mb-4">
+  <div class="form-group">
+    <label for="correo" class="text-light">Correo</label>
+    <input id="correo" [(ngModel)]="credenciales.correo" name="correo" type="email" class="form-control" placeholder="Correo" required />
+  </div>
+
+  <div class="form-group">
+    <label for="contrasena" class="text-light">Contraseña</label>
+    <input id="contrasena" [(ngModel)]="credenciales.contrasena" name="contrasena" type="password" class="form-control" placeholder="Contraseña" required />
+  </div>
+
+  <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+</form>
+
+<a routerLink="/registro" class="text-dark">¿No tienes una cuenta? Regístrate</a>
+

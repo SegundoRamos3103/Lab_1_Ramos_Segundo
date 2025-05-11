@@ -1,0 +1,11 @@
+body {
+  background-color: #333;
+}
+
+.table th, .table td {
+  color: white;
+}
+
+.btn-warning, .btn-danger {
+  margin-right: 5px;
+}

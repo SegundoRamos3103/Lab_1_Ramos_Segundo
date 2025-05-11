@@ -1,0 +1,6 @@
+projectKey=ProyectoC_SW
+serverUrl=http://localhost:9000
+serverVersion=25.5.0.107428
+dashboardUrl=http://localhost:9000/dashboard?id=ProyectoC_SW
+ceTaskId=6512d93a-fc74-429f-81b4-43b7004e77be
+ceTaskUrl=http://localhost:9000/api/ce/task?id=6512d93a-fc74-429f-81b4-43b7004e77be

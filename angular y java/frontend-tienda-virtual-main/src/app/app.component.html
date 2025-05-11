@@ -1,0 +1,127 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <!-- Logo o Nombre de la tienda -->
+      <a class="navbar-brand d-flex align-items-center" [routerLink]="estaAutenticado ? '/lista-productos' : '/login'">
+        <i class="bi bi-shop me-2"></i> Mi Tienda
+      </a>      
+
+      <!-- Botón de menú para móviles -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <!-- Rutas visibles solo si NO está autenticado -->
+          <ng-container *ngIf="!estaAutenticado">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/registro">
+                <i class="bi bi-person-plus-fill"></i> Registro
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/login">
+                <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión
+              </a>
+            </li>
+          </ng-container>
+
+          <!-- Rutas visibles solo si está autenticado -->
+          <ng-container *ngIf="estaAutenticado">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/perfil">
+                <i class="bi bi-person-circle"></i> Perfil
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/actualizar-contrasena">
+                <i class="bi bi-key-fill"></i> Cambiar Contraseña
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/lista-productos">
+                <i class="bi bi-list"></i> Ver Productos
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/carrito">
+                <i class="bi bi-cart"></i> Carrito
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/historial-pedidos">
+                <i class="bi bi-clock-history"></i> Historial de Pedidos
+              </a>
+            </li>
+
+            <!-- Opciones solo para Admin (Menú desplegable) -->
+            <ng-container *ngIf="usuarioRol === 'admin'">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="adminDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i class="bi bi-shield-lock"></i> Administración
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="adminDropdown">
+                  
+                  <li>
+                    <a class="dropdown-item" routerLink="/admin/dashboard">
+                      <i class="bi bi-speedometer2"></i> Dashboard
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" routerLink="/admin/usuarios">
+                      <i class="bi bi-people"></i> Gestionar Usuarios
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" routerLink="/admin/categorias">
+                      <i class="bi bi-tags"></i> Gestionar Categorías
+                    </a>
+                  </li>
+                  <!-- Gestionar Productos -->
+                  <li>
+                    <a class="dropdown-item" routerLink="/gestion-productos">
+                      <i class="bi bi-box-seam"></i> Gestionar Productos
+                    </a>
+                  </li>
+                  <!-- Gestionar Pedidos -->
+                  <li>
+                    <a class="dropdown-item" routerLink="/gestion-pedidos">
+                      <i class="bi bi-clipboard-check"></i> Gestionar Pedidos
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ng-container>
+
+            <!-- Botón de Cerrar Sesión -->
+            <li class="nav-item">
+              <button class="btn btn-danger ms-3" (click)="cerrarSesion()">
+                <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+              </button>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="container mt-4">
+  <router-outlet></router-outlet>
+</main>

@@ -1,0 +1,39 @@
+body {
+  background-color: #121212;
+}
+
+.pedido {
+  background-color: #2a2a2a;
+}
+
+.pedido p, .pedido h4 {
+  color: white;
+}
+
+.pedido button {
+  color: white;
+}
+
+.form-control, .form-select {
+  background-color: #333;
+  color: white;
+  border: 1px solid #444;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #007bff;
+}
+
+.alert-warning {
+  background-color: #333;
+  color: white;
+}
+
+.list-group-item {
+  background-color: #2a2a2a;
+  color: white;
+}
+
+input::placeholder, textarea::placeholder{
+  color: #bbb; /* Color para el texto del placeholder */
+}

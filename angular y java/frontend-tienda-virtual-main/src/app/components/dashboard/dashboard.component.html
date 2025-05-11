@@ -1,0 +1,50 @@
+<div class="container mt-4">
+  <h2 class="text-center text-dark">Dashboard de Administración</h2>
+
+  <!-- Mostrar estadísticas si están cargadas -->
+  <div *ngIf="estadisticas.totalVentas !== undefined; else cargando">
+    <div class="row mt-4">
+      <!-- Tarjeta: Total de Ventas -->
+      <div class="col-md-4">
+        <div class="card bg-dark text-light shadow">
+          <div class="card-body text-center">
+            <h3 class="card-title">Total de Ventas</h3>
+            <p class="fs-4 fw-bold text-success">{{ estadisticas.totalVentas | currency }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta: Usuarios Registrados -->
+      <div class="col-md-4">
+        <div class="card bg-dark text-light shadow">
+          <div class="card-body text-center">
+            <h3 class="card-title">Usuarios Registrados</h3>
+            <p class="fs-4 fw-bold text-primary">{{ estadisticas.totalUsuarios }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta: Productos Más Vendidos -->
+      <div class="col-md-4">
+        <div class="card bg-dark text-light shadow">
+          <div class="card-body">
+            <h3 class="card-title text-center">Productos Más Vendidos</h3>
+            <ul class="list-group">
+              <li *ngFor="let producto of estadisticas.productosMasVendidos" class="list-group-item bg-secondary text-light">
+                <strong>{{ producto.nombre }}</strong> - {{ producto.total_vendido }} unidades
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mensaje de carga -->
+  <ng-template #cargando>
+    <div class="text-center mt-4">
+      <div class="spinner-border text-primary" role="status"></div>
+      <p class="mt-2 text-light">Cargando estadísticas...</p>
+    </div>
+  </ng-template>
+</div>

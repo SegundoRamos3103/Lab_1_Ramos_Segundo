@@ -1,0 +1,30 @@
+body {
+  background-color: #333;
+}
+
+.pedido {
+  background-color: #444;
+  border-radius: 8px;
+}
+
+.pedido button {
+  margin-top: 10px;
+}
+
+/* Carrusel de imágenes dentro de los detalles del pedido */
+.carousel-container img {
+  object-fit: cover;  /* Asegura que las imágenes no se distorsionen */
+  width: 100%;         /* Ocupa todo el espacio disponible */
+  height: 200px;       /* Fija una altura para las imágenes */
+}
+
+/* Asegura que el carrusel tenga un margen para evitar que quede demasiado pegado al texto */
+.carousel-container {
+  margin-top: 10px;
+  max-width: 200px;  /* Ajusta el ancho máximo */
+}
+
+input::placeholder, textarea::placeholder{
+  color: #bbb; /* Color para el texto del placeholder */
+}
+
